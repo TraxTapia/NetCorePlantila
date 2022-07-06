@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    const int tipoMensaje = 1;
+    const int tipoAlerta = 2;
+}
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+
+        <div class="navbar-header">
+            <div id="clockdate">
+                <div class="clockdate-wrapper">
+                    <div id="clock"></div>
+                    <div id="date"></div>
+                </div>
+            </div>
+        </div>
+        
+        <ul class="nav navbar-top-links navbar-right">
+            <li style="padding:20px">
+                <span class="btn-primary" style="padding-left:5px;padding-right:5px;">@(Html.NombreSitio(Context.Session))</span>
+            </li>
+            <li style="padding:20px">
+                <span class="m-r-sm text-white welcome-message" data-i18n="topnav.welcometext">@(Html.AppHeaderData(Context.Session))</span>
+            </li>
+            <li class="dropdown">
+                @(Html.Raw(await Html.fnConsultaMensajes(Context.Session, tipoMensaje)))
+            </li>
+            <li class="dropdown">
+                @(Html.Raw(await Html.fnConsultaMensajes(Context.Session, tipoAlerta)))
+            </li>
+            <li>
+                @*<a href="@Url.Action("Login", "Home")" class="text-white">
+                <i class="fa fa-sign-out"></i>Salir
+            </a>*@
+                <a href="/Home/Login" class="text-white">
+                    <i class="fa fa-sign-out"></i>Salir
+                </a>
+            </li>
+            <li>
+                <a class="right-sidebar-toggle">
+                    <i class="fa fa-tasks text-white"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

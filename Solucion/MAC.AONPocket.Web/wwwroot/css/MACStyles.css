@@ -1,0 +1,294 @@
+﻿body {
+}
+
+div.contenedor-mac {
+    border: 2px solid #407d86;
+    border-radius: 3px;
+}
+
+div.grid-mac-contenedor {
+    border: 2px solid #407d86;
+    border-radius: 3px;
+    background-color: #fff;
+    width: 100%;
+    position: relative;
+    overflow: auto;
+    padding: 10px 20px;
+}
+
+.grid-mac-sel tbody tr {
+    cursor: pointer;
+}
+
+
+.grid-mac-contenedor,
+.contenedor-mac {
+    width: 100%;
+}
+
+table.contenedor-mac td:nth-child(2),
+table.grid-mac-contenedor td:nth-child(2) {
+    padding: 10px 20px;
+}
+
+.form-mac-inline input.form-control,
+.form-mac-inline textarea.form-control {
+    width: auto;
+    color: #407d86 !important;
+    border: 1px solid #386d74;
+    border-radius: 0.2em;
+    border-width: thin;
+}
+
+.form-mac label {
+    color: #407d86 !important;
+}
+
+.form-mac input.form-control,
+.form-mac textarea.form-control {
+    width: 100% !important;
+    color: #407d86 !important;
+    border: 1px solid #386d74;
+    border-radius: 0.2em;
+    border-width: thin;
+}
+
+.form-mac textarea.form-control {
+    resize: none;
+}
+
+.form-mac select.form-control {
+    width: auto !important;
+    color: #407d86 !important;
+    border: 1px solid #386d74;
+    border-radius: 0.2em;
+    border-width: thin;
+    cursor: pointer;
+}
+
+.form-mac input.form-control:focus {
+    outline-offset: -2px !important;
+    outline: #386d74 auto 5px !important;
+}
+
+.form-mac input.form-control:active {
+    outline-offset: -2px !important;
+    outline: #386d74 auto 5px !important;
+}
+
+.btn-mac {
+    color: #FFFFFF;
+    background-color: #407d86;
+    border: 1px solid #FFFFFF !important;
+    border-radius: 0.3em;
+}
+
+    .btn-mac:hover {
+        color: #407d86;
+        background-color: #ffffff;
+        border: 1px solid #3b737b !important;
+    }
+
+    .btn-mac:active {
+        color: #407d86;
+        background-color: #ffffff;
+        border: 1px solid #3b737b !important;
+    }
+
+    .btn-mac:focus {
+        color: #407d86;
+        background-color: #ffffff;
+        border: 1px solid #3b737b !important;
+    }
+
+.btn-icon {
+    cursor: pointer;
+}
+
+.btn-mac-success {
+    background-color: #94d60f !important;
+    border-color: #94d60e !important;
+    color: #FFFFFF;
+}
+
+    .btn-mac-success:hover, .btn-mac-success:active, .btn-mac-success:focus, .btn-mac-success.hover {
+        background-color: #ffffff !important;
+        color: #94d60f !important;
+        border-color: #94d60f !important;
+    }
+
+        .btn-mac-success.active.focus, .btn-mac-success.active:focus, .btn-mac-success.active:hover, .btn-mac-success:active.focus, .btn-mac-success:active:focus, .btn-mac-success:active:hover, .open > .dropdown-toggle.btn-mac-success.focus, .open > .dropdown-toggle.btn-mac-success:focus, .open > .dropdown-toggle.btn-mac-success:hover {
+            color: #FFFFFF !important;
+            background-color: #94d60f !important;
+            border-color: #94d60f !important;
+        }
+
+    .btn-mac-success:hover, .btn-mac-success:active, .btn-mac-success.hover {
+        background-color: #ffffff !important;
+        color: #94d60f !important;
+        border-color: #94d60f !important;
+    }
+
+
+.grid-header tr th {
+    background-color: #407d86;
+    color: rgba(255,255,255,1);
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    text-align: center;
+    min-width: 120px;
+    padding: 10px 20px;
+}
+
+.grid-mac {
+    border: 2px solid #407d86;
+    border-radius: 3px;
+    background-color: #fff;
+    width: 100%;
+}
+
+    .grid-mac thead tr th {
+        background-color: #407d86;
+        color: rgba(255,255,255,1);
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        vertical-align: middle;
+        text-align: center;
+        min-width: 120px;
+        padding: 10px 20px;
+    }
+
+        .grid-mac thead tr th input {
+            width: 100%;
+            color: #407d86;
+        }
+
+            .grid-mac thead tr th input:focus {
+                outline-offset: -2px;
+                outline: #407d86 auto 5px;
+            }
+
+            .grid-mac thead tr th input:active {
+                outline-offset: -2px;
+                outline: #407d86 auto 5px;
+            }
+
+        .grid-mac thead tr th select {
+            width: 100%;
+            color: #407d86;
+        }
+
+    .grid-mac tr:nth-child(even) {
+        background: #dae2e8;
+    }
+
+    .grid-mac tbody tr td:first-child {
+        border-left: 0;
+        padding-left: 8px;
+    }
+
+    .grid-mac tbody tr td {
+        border: 1px solid !important;
+        border-color: #fff #fff #fff #dae2e8 !important;
+        min-width: 40px;
+        padding: 10px 20px;
+        color: #407d86;
+    }
+
+    .grid-mac tbody tr:hover {
+        background-color: rgba(66, 185, 131, 0.2);
+    }
+
+.grid-mac-paginador {
+    width: 100%;
+    color: #407d86;
+}
+
+    .grid-mac-paginador table {
+        width: 100%;
+    }
+
+        .grid-mac-paginador table tr td {
+            min-width: 0px;
+            padding: 0px;
+            vertical-align: middle;
+        }
+
+            .grid-mac-paginador table tr td:nth-child(1) {
+            }
+
+            .grid-mac-paginador table tr td:nth-child(2) {
+                width: 100%;
+                text-align: left;
+            }
+
+            .grid-mac-paginador table tr td:nth-child(3) {
+                text-align: right;
+            }
+
+    .grid-mac-paginador select {
+        cursor: pointer;
+    }
+
+    .grid-mac-paginador .pagination {
+        margin: 1px !important;
+        display: inline-flex;
+        display: inline-flexbox;
+    }
+
+        .grid-mac-paginador .pagination > li > a, .grid-mac-paginador .pagination > li > span {
+            border-color: #407d86 !important;
+        }
+
+            .grid-mac-paginador .pagination > li > a:focus, .grid-mac-paginador .pagination > li > span:focus {
+                background-color: rgba(66, 185, 131, 0.2) !important;
+            }
+
+            .grid-mac-paginador .pagination > li > a:hover, .grid-mac-paginador .pagination > li > span:hover {
+                background-color: rgba(66, 185, 131, 0.2) !important;
+            }
+
+        .grid-mac-paginador .pagination .active {
+            background: #407d86;
+            color: #FFFFFF;
+            border-color: #407d86;
+        }
+
+        .grid-mac-paginador .pagination a {
+            cursor: pointer;
+        }
+
+    .grid-mac-paginador .cont-foot {
+        display: inline-flex;
+        display: inline-flexbox;
+        width: 100%;
+    }
+
+
+.grid-mac-filtro {
+}
+
+.ListaMultiple {
+    border-style: solid;
+    border-width: thin;
+    border-color: green;
+}
+
+.theme-date-mac .vdatetime-popup__header,
+.theme-date-mac .vdatetime-calendar__month__day--selected > span > span,
+.theme-date-mac .vdatetime-calendar__month__day--selected:hover > span > span {
+    background: #407d86;
+}
+
+.theme-date-mac .vdatetime-year-picker__item--selected,
+.theme-date-mac .vdatetime-time-picker__item--selected,
+.theme-date-mac .vdatetime-popup__actions__button {
+    color: #407d86;
+}

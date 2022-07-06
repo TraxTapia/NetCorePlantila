@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="SSH.NET" Version="2020.0.0" />
+    <PackageReference Include="System.IO.Packaging" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MAC.Servicios.AONPocket.Entidades\MAC.Servicios.AONPocket.Entidades.csproj" />
+    <ProjectReference Include="..\MAC.Servicios.AONPocket.Modelos\MAC.Servicios.AONPocket.Modelos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\..\librerias\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="MAC.Servicios.Data.NC">
+      <HintPath>..\..\librerias\MAC.Servicios.Data.NC.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,189 @@
+﻿@using UniversalModeloNegocio.AONPocket;
+@model MAC.Servicios.Modelos.TablaGenerica
+@{
+    String OT = String.Empty;
+    if (ViewBag.OT != null)
+    {
+        OT = ViewBag.OT;
+    }
+    List<UniversalModeloNegocio.Generales.Arbol> archivosArmado = new List<UniversalModeloNegocio.Generales.Arbol>();
+    if (ViewBag.ArchivosArmado != null)
+    {
+        archivosArmado = ViewBag.ArchivosArmado;
+    }
+    String errorApp = String.Empty;
+    if (ViewBag.Error != null)
+    {
+        errorApp = ViewBag.Error;
+    }
+    String FileBase64 = String.Empty;
+    if (ViewBag.ErrorArmado != null)
+    {
+        FileBase64 = ViewBag.ErrorArmado;
+    }
+    Byte tipoEnvioP = 1;
+    if (ViewBag.TipoEnvioConfirm != null)
+    {
+        tipoEnvioP = ViewBag.TipoEnvioConfirm;
+    }
+    List<PlanCondicionesGenerales> PlanesDocumentacion = new List<PlanCondicionesGenerales>();
+    if (ViewBag.PlanesDocumentacion != null)
+    {
+        PlanesDocumentacion = ViewBag.PlanesDocumentacion;
+    }
+    if (ViewBag.Avisos != null)
+    {
+        List<String> erroresEnvio = ViewBag.Avisos;
+        errorApp = String.Join(',', erroresEnvio);
+    }
+    String CargaCG = String.Empty;
+}
+<style>
+    .custom-scrollbar {
+        position: relative;
+        height: 350px;
+        overflow: auto;
+    }
+
+    .table-wrapper-scroll-y {
+        display: block;
+    }
+</style>
+<h3 class="text-info">Envío de Documentación</h3>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-success dim" type="button" onclick="ModalPendientes();">
+            <i class="fa fa-lg fa-search fa-fw" aria-hidden="true" data-toggle="tooltip" title="Envíos Pendientes"></i>
+        </button>
+        <button class="btn btn-success dim" type="button" data-toggle="modal" data-target="#divModalCondicionesGenerales">
+            <i class="fa fa-lg fa-file-archive-o" aria-hidden="true" data-toggle="tooltip" title="Condiciones Generales"></i>
+        </button>
+    </div>
+</div>
+<div id="divModalPendientes" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog mw-100 w-75">
+        <div class="modal-content" id="boxBusquedaEnvios">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Envíos Pendientes</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="divEnvios">
+                    <span>Pulse el botón consultar</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success btn-sm" onclick="Pendientes();" id="btnConsultarPendientes"><i class="fa fa-search-plus"></i>&nbsp;Consultar</button>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divModalCondicionesGenerales" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog mw-100 w-75">
+        <div class="modal-content">
+            <div class="modal-header" id="divFileCondiciones">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Condiciones Generales</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="UpLoadCondiciones" class="col-xs-12">
+                    <div class="row">
+                        <div class="col-1"><label class="col-form-label">Plan</label></div>
+                        <div class="col-11">
+                            <select class="form-control" id="PlanDoc" name="PlanDoc">
+                                @foreach (PlanCondicionesGenerales plan in PlanesDocumentacion)
+                                {
+                                    CargaCG = plan.CondicionesGenerales ? "(S)" : "(N)";
+                                    <option value="@plan.AgrupacionCG">@String.Concat(CargaCG," ",plan.DescripcionSicas)</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="file" class="form-control col-10" name="condiciones" id="filecondiciones" multiple onchange="ActivarCargaDoctos();" />
+                        <button type="button" class="btn btn-primary col-2" id="btnCargaCondiciones" onclick="SendServer();" style="display: none;">Cargar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="DivDetalleOT">
+    @await Html.PartialAsync("_DetalleOTPartial", Model)
+</div>
+@if (Model != null && Model.filas.Count > 0)
+{
+    @if (archivosArmado.Count() > 0)
+    {
+        <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="EnviarDocumentacion" class="col-xs-12">
+            <div id="ConfirmarEnvio" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Enviar documentación</h4>
+                        </div>
+                        <div class="modal-body">
+                            @if (!String.IsNullOrEmpty(FileBase64))
+                            {
+                                <div class="row text-center">
+                                    <a download="ErroresArmado.XLSX" href="data:image/png;base64,@FileBase64">Hay errores en el armado, descargue aquí el archivo con el detalle.</a>
+                                </div>
+                            }
+                            <div class="table-wrapper-scroll-y custom-scrollbar">
+                                <ul id="treeGen">
+                                    @Html.Raw(Html.RenderArchivos(archivosArmado))
+                                </ul>
+                            </div>
+                            <input type="hidden" value="@tipoEnvioP" name="tipoEnvio" id="tipoEnvioConfirm" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success btn-sm">Aceptar</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+}
+else
+{
+    <div id="DivSubirOT">
+        <div class="row">
+            <p class="text-info" style="padding-left: 15px; padding-top: 10px; font-size: medium">Layout</p>
+        </div>
+        <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="UpLoad" class="col-xs-12">
+            <div class="row">
+                <span class="col-1">OT</span>
+                <input class="col-2" type="text" id="OT" name="OT" onchange="habilitarCarga();" />
+                <input type="file" class="form-control col-8" name="files" multiple accept=".xlsx,.xls" id="fileLayout" onchange="habilitarCarga();" />
+                <button type="submit" class="btn btn-primary btnSubmit col-1" id="btnCargaLayout" disabled>Cargar</button>
+            </div>
+        </form>
+    </div>
+}
+@section scripts{
+    <script>
+        var confirmarEnvio = false;
+        var errorApp = '@errorApp';
+        var envioArchivos = "";
+    </script>
+    @if (ViewBag.ArchivosArmado != null)
+    {
+        <script>
+            confirmarEnvio = true;
+        </script>
+    }
+    @if (ViewBag.EnvioOk != null & ViewBag.EnvioOk == true)
+    {
+        <script>
+            envioArchivos = "OK";
+        </script>
+     }
+    <script src="~/js/Transferencia/Transferencia.js" asp-append-version="true"></script>
+}

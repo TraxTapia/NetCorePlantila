@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="MAC.Servicios.AONPocket.SFCoreType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <Parameter Name="MAC.Servicios.AONPocket.Api_ASPNETCORE_ENVIRONMENT" DefaultValue="" />
+    <Parameter Name="MAC.Servicios.AONPocket.Api_InstanceCount" DefaultValue="-1" />
+  </Parameters>
+  <!-- Importe el elemento ServiceManifest del ServicePackage. Los elementos ServiceManifestName y ServiceManifestVersion 
+       deben coincidir con los atributos Name y Version del elemento ServiceManifest definido en el 
+       archivo ServiceManifest.xml. -->
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="MAC.Servicios.AONPocket.ApiPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+    <EnvironmentOverrides CodePackageRef="code">
+      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[MAC.Servicios.AONPocket.Api_ASPNETCORE_ENVIRONMENT]" />
+    </EnvironmentOverrides>
+  </ServiceManifestImport>
+  <DefaultServices>
+    <!-- La sección siguiente crea instancias de tipos de servicio cuando se crea una 
+         instancia de este tipo de aplicación. También puede crear una o varias instancias de tipo de servicio 
+         usando el módulo ServiceFabric de PowerShell.
+         
+         El atributo ServiceTypeName siguiente debe coincidir con el nombre definido en el archivo ServiceManifest.xml importado. -->
+    <Service Name="MAC.Servicios.AONPocket.Api" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="MAC.Servicios.AONPocket.ApiType" InstanceCount="[MAC.Servicios.AONPocket.Api_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>

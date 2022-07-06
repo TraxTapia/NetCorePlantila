@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MAC.Servicios.AONPocket.DAO\MAC.Servicios.AONPocket.DAO.csproj" />
+    <ProjectReference Include="..\MAC.Servicios.AONPocket.Entidades\MAC.Servicios.AONPocket.Entidades.csproj" />
+    <ProjectReference Include="..\MAC.Servicios.AONPocket.Modelos\MAC.Servicios.AONPocket.Modelos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MAC.Servicios.ClienteRestNC">
+      <HintPath>..\..\librerias\MAC.Servicios.ClienteRestNC.dll</HintPath>
+    </Reference>
+    <Reference Include="MAC.Servicios.Data.NC">
+      <HintPath>..\..\librerias\MAC.Servicios.Data.NC.dll</HintPath>
+    </Reference>
+    <Reference Include="MACServiceGenerico">
+      <HintPath>..\..\librerias\MACServiceGenerico.dll</HintPath>
+    </Reference>
+    <Reference Include="Mensajeria">
+      <HintPath>..\..\librerias\Mensajeria.dll</HintPath>
+    </Reference>
+    <Reference Include="UniversalModeloNegocio">
+      <HintPath>..\..\librerias\UniversalModeloNegocio.dll</HintPath>
+    </Reference>
+    <Reference Include="Utilidades">
+      <HintPath>..\..\librerias\Utilidades.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

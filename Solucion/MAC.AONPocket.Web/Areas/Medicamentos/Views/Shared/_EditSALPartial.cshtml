@@ -1,0 +1,35 @@
+﻿@using MAC.Models.Medicamentos;
+@model VMSAL
+@{
+    
+    List<SelectListItem> listUnidades = new List<SelectListItem>();
+    listUnidades.Add(new SelectListItem() { Value = "", Text = "Seleccionar" });
+    listUnidades.Add(new SelectListItem() { Value = "1", Text = "MG" });
+}
+<div class="row">
+    <div class="col-3">
+        <label asp-for="SALId" class="control-label"></label>
+    </div>
+    <div class="col-9">
+        @Html.DropDownList("SALId", listUnidades, new { @class = "form-control" })
+        <span asp-validation-for="SALId" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <label asp-for="Concentracion" class="control-label"></label>
+    </div>
+    <div class="col-9">
+        <input asp-for="Concentracion" class="form-control" />
+        <span asp-validation-for="Concentracion" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <label asp-for="UnidaddeMedidaId" class="control-label"></label>
+    </div>
+    <div class="col-9">
+        @Html.DropDownList("UnidaddeMedidaId", listUnidades, new { @class = "form-control" })
+        <span asp-validation-for="UnidaddeMedidaId" class="text-danger"></span>
+    </div>
+</div>

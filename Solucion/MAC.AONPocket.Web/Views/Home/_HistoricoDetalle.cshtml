@@ -1,0 +1,77 @@
+﻿@using UniversalModeloNegocio.AONPocket
+@model List<VMDocumentacionEnvioDetalles>
+@{
+    //Test
+    List<VMDocumentacionEnvioDetalles> lista = new List<VMDocumentacionEnvioDetalles>();
+    if (Model != null && Model.Count > 0)
+    {
+        lista = Model;
+    }
+    String FechaEnvio = String.Empty;
+}
+<div class="row">
+    <span class="text-success">Detalle de Envío</span>
+</div>
+@if (lista.Count() > 0)
+{
+    <div class="table-wrapper-scroll-y custom-scrollbar">
+        <table class="table table-bordered table-striped mb-0">
+            <thead class="thead-light">
+                <tr>
+                    <th>Id</th>
+                    <th>Póliza</th>
+                    <th>Cod. Afiliado</th>
+                    <th>Parentesco</th>
+                    <th>Certificado</th>
+                    <th>Nombre</th>
+                    <th>AP. Paterno</th>
+                    <th>AP. Materno</th>
+                    <th>Contrato</th>
+                    <th>eMail</th>
+                    <th>Envío eMail</th>
+                    <th>Envío FTP</th>
+                    <th>Num. Solicitud</th>
+                    <th>Fecha de Envío</th>
+                    <th>Archivo Orig.</th>
+                    <th>Archivo Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (VMDocumentacionEnvioDetalles obenvio in lista)
+                {
+                    if (obenvio.FechaEnvio != null)
+                    {
+                        FechaEnvio = ((DateTime)obenvio.FechaEnvio).ToString("dd/MM/yyyy HH:mm:ss");
+                    }
+                    <tr>
+                        <td>@obenvio.Id</td>
+                        <td>@obenvio.Poliza</td>
+                        <td>@obenvio.ICodAfiliado</td>
+                        <td>@obenvio.Parentesco</td>
+                        <td>@obenvio.Certificado</td>
+                        <td>@obenvio.Nombre</td>
+                        <td>@obenvio.ApellidoPaterno</td>
+                        <td>@obenvio.ApellidoMaterno</td>
+                        <td>@obenvio.Contrato</td>
+                        <td>@obenvio.Email</td>
+                        <td>@(obenvio.EnvioxEmail ? "Si" : "No")</td>
+                        <td>@(obenvio.EnvioxFTP ? "Si" : "No")</td>
+                        <td>@obenvio.NumSolicitud</td>
+                        <td>@FechaEnvio</td>
+                        <td>@obenvio.ArchivoOriginal</td>
+                        <td>@obenvio.ArchivoFinal</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="row">
+        <span class="text-danger">Sin registros</span>
+    </div>
+}
+
+
+

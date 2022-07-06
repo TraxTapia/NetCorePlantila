@@ -1,0 +1,92 @@
+﻿@model MAC.Servicios.Modelos.TablaGenerica
+@{
+    int rows = 0;
+    int cols = 0;
+    if (Model != null)
+    {
+        cols = Model.encabezado.columnas.Count;
+        rows = Model.filas.Count;
+    }
+    String OT = String.Empty;
+    if (ViewBag.OT != null)
+    {
+        OT = ViewBag.OT;
+    }
+    Boolean DocCargada = false;
+    if (ViewBag.DocCargada != null)
+    {
+        DocCargada = ViewBag.DocCargada;
+    }
+    int Id = 1;
+    if (ViewBag.Id != null)
+    {
+        Id = ViewBag.Id;
+    }
+    Byte tipoEnvio = 1;
+}
+@if (Model != null && Model.filas.Count > 0)
+{
+    <div class="row">
+        <p class="text-info" style="padding-left: 15px; padding-top: 10px; font-size: medium">OT: @OT</p>
+    </div>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="UpLoadDocumentos" class="col-xs-12">
+        <div class="row">
+            <h2 class="text-primary">Documentación</h2>
+        </div>
+        <div class="row">
+            <input type="file" class="form-control col-11" name="doctos" multiple />
+            <button type="submit" class="btn btn-primary btnSubmit col-1">Cargar</button>
+        </div>
+    </form>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="PrepararDocumentacion" class="col-xs-12">
+        @if (DocCargada)
+        {
+            <div class="form-group" style="padding-left:16px;">
+                <div class="row">
+                    <button type="submit" class="btn btn-primary btnSubmit col-xs-3" onclick="agregarAgrupaciones(); setParametrosEnvio('1');"><i class="fa fa-paper-plane">&nbsp;Enviar a AON</i></button>
+                    &nbsp;
+                    <button type="submit" class="btn btn-primary btnSubmit col-xs-3" onclick="setParametrosEnvio('2');"><i class="fa fa-envelope">&nbsp;eMail</i></button>
+                </div>
+            </div>
+        }
+        <input type="hidden" value="@Id" name="Id" id="Id" />
+        <input type="hidden" value="@tipoEnvio" name="tipoEnvio" id="tipoEnvio" />
+        <div id="divAgrupacion">
+
+        </div>
+        <div class="table-wrapper-scroll-y custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="text-center">
+                            <input type="checkbox" onclick="SeleccionarFilas(this);" />Sel.
+                        </th>
+                        @for (int col = 0; col < cols; col++)
+                        {
+                            <th class="text-center">
+                                <input type="checkbox" onclick="SeleccionarColumna(this,@col);" /><br />@Model.encabezado.columnas[col].valor.ToString()
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int row = 0; row < rows; row++)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                <input type="checkbox" class="selfila" />
+                            </td>
+                            @for (int col = 0; col < cols; col++)
+                            {
+                                <td class="text-center" style="white-space:nowrap;">
+                                    @Model.filas[row].columnas[col].valor.ToString()
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+}
+

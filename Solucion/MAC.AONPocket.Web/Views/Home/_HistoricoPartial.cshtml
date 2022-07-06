@@ -1,0 +1,52 @@
+﻿@using UniversalModeloNegocio.AONPocket
+@model List<VMDocumentacionEnvio>
+@{
+    String FechaEnvio = String.Empty;
+    String FechaCambio = String.Empty;
+    String func = "DetalleEnvio";
+    if (ViewBag.Funcion != null)
+    {
+        func = ViewBag.Funcion;
+    }
+    String funcRow = "";
+}
+<div class="table-wrapper-scroll-y custom-scrollbar" id="twDetalleEnvio">
+    <table class="table table-bordered table-striped mb-0">
+        <thead class="thead-light">
+            <tr>
+                <th class="text-center">
+                    Selección
+                </th>
+                <th>Id</th>
+                <th>OT</th>
+                <th>Archivo</th>
+                <th>Fecha de Envío</th>
+                <th>Usuario</th>
+                <th>Fecha Mod.</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (VMDocumentacionEnvio obenvio in Model)
+            {
+                funcRow = func + "(" + obenvio.Id +  ",'" +  obenvio.OT + "');";
+                if (obenvio.FechaEnvio != null)
+                {
+                    FechaEnvio = ((DateTime)obenvio.FechaEnvio).ToString("dd/MM/yyyy HH:mm:ss");
+                }
+                if (obenvio.FechaCambio != null)
+                {
+                    FechaCambio = ((DateTime)obenvio.FechaCambio).ToString("dd/MM/yyyy HH:mm:ss");
+                }
+                <tr>
+                    <td class="text-center"><a href="#" onclick='@funcRow'>Sel.</a></td>
+                    <td>@obenvio.Id</td>
+                    <td>@obenvio.OT</td>
+                    <td>@obenvio.Archivo</td>
+                    <td>@FechaEnvio</td>
+                    <td>@obenvio.UsuCambio</td>
+                    <td>@FechaCambio</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

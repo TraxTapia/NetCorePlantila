@@ -1,0 +1,32 @@
+﻿@using UniversalModeloNegocio.AONPocket
+@model List<VMDocumentacionEnvio>
+@{ 
+    DateTime fechaInicio = ViewBag.fechaInicio;
+	DateTime fechaFin = ViewBag.fechaFin;
+}
+
+<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="FiltroFechas" class="col-xs-12">
+    <div class="row">
+        <span class="col-2 text-primary">
+            Fec. Ini
+        </span>
+        <div class="col-3">
+            <input type="date" class="form-control" value="@fechaInicio.ToString("yyyy-MM-dd")" name="fechaInicio" />
+        </div>
+        <span class="col-2 text-primary">
+            Fec. Fin
+        </span>
+        <div class="col-3">
+            <input type="date" class="form-control" value="@fechaFin.ToString("yyyy-MM-dd")" name="fechaFin" />
+        </div>
+        <button type="submit" class="btn btn-primary col-2">Buscar</button>
+    </div>
+</form>
+<div id="DivHeader">
+    @await Html.PartialAsync("_HistoricoPartial", Model)
+</div>
+<br />
+<div id="DivDetalle">
+    @await Html.PartialAsync("_HistoricoDetalle", new List<VMDocumentacionEnvioDetalles>())
+</div>
+<script src="~/js/Transferencia/Transferencia.js?v=1.1"></script>
